@@ -14,7 +14,7 @@ SB_part=$5
 SB_core=$6
 SB_mem=$7
 genome=$8
-pipeline_scripts=(pl_trimfastqc.sh pl_STAR.sh pl_bamcoverage.sh pl_HTseqcount.sh)
+pipeline_scripts=(pl_trimfastqc.sh pl_STAR.sh pl_bam2bw.sh pl_HTseqcount.sh)
 
 
 
@@ -124,7 +124,7 @@ echo "Job ID: "${B_JID}" submitted"
 # ==============================================================================
 # annotation
 : '
-script: pl_bamcoverage.sh
+script: pl_bam2bw.sh
 input:
   1. A sampleID
   2. input directory：Step2 (sam2bam output)
