@@ -14,7 +14,7 @@ SB_proj=$4
 SB_part=$5
 SB_core=$6
 SB_mem=$7
-species=$8
+genome=$8
 pipeline_scripts=(pl_trimfastqc.sh pl_bowtie2.sh pl_samtools.sh pl_bamcoverage.sh)
 
 
@@ -41,7 +41,7 @@ echo "SBATCH project:       "${SB_proj}
 echo "SBATCH partition:     ""p"${SB_part}"G"
 echo "SBATCH core:          "${SB_core}
 echo "SBATCH memory:        "${SB_mem}"G"
-echo "Species:              "${species}
+echo "Species:              "${genome}
 
 
 
@@ -113,7 +113,7 @@ B_JID=$(\
   ${Path_main}/Step1_output \
   ${Path_main}/Step2_output \
   ${SB_core} \
-  ${species})
+  ${genome})
 
 # prune Job.ID
 B_JID=${B_JID/"Submitted batch job "/}

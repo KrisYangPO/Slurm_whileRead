@@ -13,7 +13,7 @@ SB_proj=$4
 SB_part=$5
 SB_core=$6
 SB_mem=$7
-species=$8
+genome=$8
 pipeline_scripts=(pl_trimfastqc.sh pl_STAR.sh pl_bamcoverage.sh pl_HTseqcount.sh)
 
 
@@ -40,7 +40,7 @@ echo "SBATCH project:       "${SB_proj}
 echo "SBATCH partition:     ""p"${SB_part}"G"
 echo "SBATCH core:          "${SB_core}
 echo "SBATCH memory:        "${SB_mem}"G"
-echo "Species:              "${species}
+echo "Species:              "${genome}
 
 
 
@@ -92,7 +92,7 @@ input:
   2. input directory (trimgalore: Step1_output).
   3. output directory.
   4. core number.
-  5. species.'
+  5. genome.'
 
 echo "execute script: ""${pipeline_scripts[1]}"
 mkFolder Step2_output
@@ -112,7 +112,7 @@ B_JID=$(\
   ${Path_main}/Step1_output \
   ${Path_main}/Step2_output \
   ${SB_core} \
-  ${species})
+  ${genome})
 
 # prune Job.ID
 B_JID=${B_JID/"Submitted batch job "/}
@@ -169,7 +169,7 @@ input:
   1. input directory (STAR output)
   2. output directory.
   3. core number.
-  4. species'
+  4. genome'
 
 echo "execute script: ""${pipeline_scripts[3]}"
 mkFolder Step4_output
@@ -189,7 +189,7 @@ D_JID=$(\
   ${Path_main}/Step2_output \
   ${Path_main}/Step4_output \
   ${SB_core} \
-  ${species})
+  ${genome})
 
 # prune Job.ID
 D_JID=${D_JID/"Submitted batch job "/}
