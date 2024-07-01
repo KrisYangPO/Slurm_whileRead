@@ -197,4 +197,11 @@ echo "Job ID: "${D_JID}" submitted"
 
 
 
-#
+# ==============================================================================
+echo \
+ "Step 1: trimgalore (Step1_output) \
+  Step 2: STAR (Step2_output) \
+  Step 3: bamcoverage (Step2_output) \
+  Step 4: HTSeq-count  (Step3_output)"
+
+
