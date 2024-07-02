@@ -35,13 +35,13 @@ source \
 source ${Path_main}/scripts/config_PATHgenome.sh
 
 # Transfer xlsx to csv
-sh ${Path_main}/scripts/config_xlsx2csv.sh ${SampleTable}
-grep -v "#" ${SampleTable/.xlsx/.bed}
+sh ${Path_main}/scripts/config_xlsx2csv.sh ${Path_main}/input/${SampleTable}
+grep -v "#" ${Path_main}/input/${SampleTable/.xlsx/.bed}
 
 
 # Execute pipeline following sample table's information.
 # ==============================================================================
-grep -v "#" ${SampleTable/.xlsx/.bed} | while IFS=$'\t' read -r c1 c2 c3 c4
+grep -v "#" ${Path_main}/input/${SampleTable/.xlsx/.bed} | while IFS=$'\t' read -r c1 c2 c3 c4
 do
   # informations should be identical to columns of sample table.
   sampleID="${c1}"
@@ -50,6 +50,7 @@ do
   genome="${c4}"
   pipeline=config_pipeline_${strategy}.sh
 
+  echo -e "\n\n"
   echo "Input Summary:"
   echo "------------------------------------------"
   echo "Sample   : ${sampleID}"
