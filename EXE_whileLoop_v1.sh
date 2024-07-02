@@ -16,7 +16,7 @@ variables description：
 
 Path_main=/staging/biology/ls807terra/analysis/*project_name*
 Path_fastq=/staging/biology/ls807terra/0_fastq/*project_name*
-SampleTable=${Path_main}/input/*sampleTable_Name*.xlsx
+SampleTable=$(basename ${Path_main}/input/*.xlsx)
 SB_prj=MST109178
 SB_part=186
 SB_core=28
@@ -36,7 +36,7 @@ source ${Path_main}/scripts/config_PATHgenome.sh
 
 # Transfer xlsx to csv
 sh ${Path_main}/scripts/config_xlsx2csv.sh ${SampleTable}
-
+grep -v "#" ${SampleTable/.xlsx/.bed}
 
 
 # Execute pipeline following sample table's information.
