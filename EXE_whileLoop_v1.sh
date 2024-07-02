@@ -35,7 +35,7 @@ source \
 source ${Path_main}/scripts/config_PATHgenome.sh
 
 # Transfer xlsx to csv
-sh ${Path_main}/scripts/config_xlsx2csv.sh ${Path_main}/input/${SampleTable}
+sh ${Path_main}/scripts/config_xlsx2csv.sh ${SampleTable}
 grep -v "#" ${SampleTable/.xlsx/.bed}
 
 
