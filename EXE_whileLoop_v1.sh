@@ -9,14 +9,14 @@
 2. Scripts used in pipeline would be stored in folder "scripts".
 3. sample table files should be stored in folder "input".
 
-variables description：
+variables description:
    Path_main=main path for this analysis project.
    Path_fastq=directory storing FASTQ files.
    sampleTable=directory storing sample Table file (ex: sampleTable.xlsx).'
 
 Path_main=/staging/biology/ls807terra/analysis/*project_name*
 Path_fastq=/staging/biology/ls807terra/0_fastq/*project_name*
-SampleTable=$(basename ${Path_main}/input/*.xlsx)
+SampleTable=${Path_main}/input/$(basename ${Path_main}/input/*.xlsx)
 SB_prj=MST109178
 SB_part=186
 SB_core=28
@@ -36,12 +36,12 @@ source ${Path_main}/scripts/config_PATHgenome.sh
 
 # Transfer xlsx to csv
 sh ${Path_main}/scripts/config_xlsx2csv.sh ${Path_main}/input/${SampleTable}
-grep -v "#" ${Path_main}/input/${SampleTable/.xlsx/.bed}
+grep -v "#" ${SampleTable/.xlsx/.bed}
 
 
 # Execute pipeline following sample table's information.
 # ==============================================================================
-grep -v "#" ${Path_main}/input/${SampleTable/.xlsx/.bed} | while IFS=$'\t' read -r c1 c2 c3 c4
+grep -v "#" ${SampleTable/.xlsx/.bed} | while IFS=$'\t' read -r c1 c2 c3 c4
 do
   # informations should be identical to columns of sample table.
   sampleID="${c1}"
