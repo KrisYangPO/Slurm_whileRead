@@ -41,7 +41,7 @@ Path_fastq=$(sed -n 's/#Path_fastq:\t//1p' ${SampleTable/.xlsx/.bed})
 SB_prj=$(sed -n 's/#SB_Project:\t//1p' ${SampleTable/.xlsx/.bed})
 SB_part=$(sed -n 's/#SB_part:\t//1p' ${SampleTable/.xlsx/.bed})
 SB_core=$(sed -n 's/#SB_core:\t//1p' ${SampleTable/.xlsx/.bed})
-SB_mem=$(sed -n 's/SB_mem:\t//1p' ${SampleTable/.xlsx/.bed})
+SB_mem=$(sed -n 's/#SB_mem:\t//1p' ${SampleTable/.xlsx/.bed})
 
 # report summary:
 echo -e "\n"
