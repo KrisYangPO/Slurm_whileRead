@@ -43,7 +43,7 @@ if [ "$samples_len" -eq 2 ];then
   bowtie2 -x ${index} -p ${core} -1 ${samples[0]} -2 ${samples[1]} -S ${out}/${sampleID}.sam
 
 elif [ "$samples_len" -eq 1 ];then
-  bowtie2 -x ${index} -p $ncore -U ${samples[0]} -S ${out}/${sampleID}.sam
+  bowtie2 -x ${index} -p ${core} -U ${samples[0]} -S ${out}/${sampleID}.sam
 
 else
   echo -e "receive more than 2 or less than 1 file\n file missing!"
