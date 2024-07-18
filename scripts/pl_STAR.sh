@@ -9,12 +9,15 @@ core=$4
 species=$5
 
 # index:
-# 用判斷式判斷 speci 裡面有沒有 mouse/human 字串。
-if [[ $species == *'mouse'* ]]; then
+# 用判斷式判斷 speci 裡面有沒有 mm10/chm13/hg38 字串。
+if [[ $species == *'mm10'* ]]; then
   index=${staridx_mm10}
 
-elif [[ $species == *'human'* ]]; then
+elif [[ $species == *'chm13'* ]]; then
   index=${staridx_chm13}
+
+elif [[ $species == *'hg38'* ]]; then
+  index=${staridx_hg38}
 
 fi
 
