@@ -4,7 +4,7 @@
 
 
 
-# Input parameters 還有 Path 資訊:
+# Input parameters:
 # ==============================================================================
 # 分析路徑
 sampleID=$1
@@ -132,6 +132,7 @@ input:
   3. core number.'
 
 echo "execute script: ""${pipeline_scripts[2]}"
+mkFolder Step3_output
 
 C_JID=$(\
  sbatch \
@@ -146,6 +147,7 @@ C_JID=$(\
   ${Path_main}/scripts/${pipeline_scripts[2]} \
   ${sampleID} \
   ${Path_main}/Step2_output \
+  ${Path_main}/Step3_output \
   ${SB_core})
 
 # prune Job.ID
@@ -169,7 +171,7 @@ input:
 Use *.rmdup.bam as input, only *.rmdup.bam has *.bai files'
 
 echo "execute script: ""${pipeline_scripts[3]}"
-mkFolder Step3_output
+mkFolder Step4_output
 
 D_JID=$(\
  sbatch \
@@ -183,8 +185,8 @@ D_JID=$(\
   -e ${Path_main}/report/Step4_${sampleID}.e.txt \
   ${Path_main}/scripts/${pipeline_scripts[3]} \
   ${sampleID} \
-  ${Path_main}/Step2_output \
   ${Path_main}/Step3_output \
+  ${Path_main}/Step4_output \
   bigwig \
   ${SB_core})
 

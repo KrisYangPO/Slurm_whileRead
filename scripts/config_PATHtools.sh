@@ -14,7 +14,7 @@
 # STAR
 /opt/ohpc/Taiwania3/pkg/biology/STAR/STAR_v2.7.9a/bin/Linux_x86_64/
 # Samtools
-/opt/ohpc/Taiwania3/pkg/biology/SAMTOOLS/SAMTOOLS_v1.13/bin/
+/opt/ohpc/Taiwania3/pkg/biology/SAMTOOLS/SAMTOOLS_v1.18/bin/
 # DeepTools
 /opt/ohpc/Taiwania3/pkg/biology/deepTools/deepTools_v3.3.1/bin/
 # BBduck

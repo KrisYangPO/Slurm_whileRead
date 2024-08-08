@@ -10,7 +10,7 @@ core=$5
 # get a ${sampleID}_*.out.bam
 # output name: sampleID_Aligned.sortedByCoord
 cd ${inputpath}
-sample=$(ls ${sampleID}*.out.bam)
+sample=$(ls ${sampleID}_*.out.bam)
 sample=${sample/.out.bam/}
 
 

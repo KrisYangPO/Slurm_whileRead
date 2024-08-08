@@ -1,30 +1,31 @@
 #!/bin/bash
 
 sampleID=$1
-Path_main=$2
-core=$3
+inputpath=$2
+outputpath=$3
+core=$4
 
 #samtobam sorttobam rmdup build index
 samtools view \
- --threads ${core} -b ${Path_main}/${sampleID}.sam > ${Path_main}/${sampleID}.bam
+ --threads ${core} -b ${outputpath}/${sampleID}.sam > ${outputpath}/${sampleID}.bam
 
 # sort bam files
 samtools sort \
- --threads ${core} -O bam ${Path_main}/${sampleID}.bam -o ${Path_main}/${sampleID}.sorted.bam
+ --threads ${core} -O bam ${outputpath}/${sampleID}.bam -o ${outputpath}/${sampleID}.sorted.bam
 
 # remove duplicates
 samtools rmdup \
- ${Path_main}/${sampleID}.sorted.bam ${Path_main}/${sampleID}.rmdup.bam
+ ${outputpath}/${sampleID}.sorted.bam ${outputpath}/${sampleID}.rmdup.bam
 
 # build index file
 samtools index \
- -@ ${core} ${Path_main}/${sampleID}.rmdup.bam ${Path_main}/${sampleID}.rmdup.bam.bai
+ -@ ${core} ${outputpath}/${sampleID}.rmdup.bam ${outputpath}/${sampleID}.rmdup.bam.bai
 
 # mapping ratio
 samtools flagstat \
- --threads ${core} ${Path_main}/${sampleID}.sorted.bam > ${Path_main}/${sampleID}.sorted.flagstat
+ --threads ${core} ${outputpath}/${sampleID}.sorted.bam > ${outputpath}/${sampleID}.sorted.flagstat
 
 # mapping ratio
 samtools flagstat \
- --threads ${core} ${Path_main}/${sampleID}.rmdup.bam > ${Path_main}/${sampleID}.rmdup.flagstat
+ --threads ${core} ${outputpath}/${sampleID}.rmdup.bam > ${outputpath}/${sampleID}.rmdup.flagstat
 
