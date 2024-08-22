@@ -8,8 +8,8 @@ outputpath=$3
 core=$4
 species=$5
 
-# index:
-# 用判斷式判斷 speci 裡面有沒有 mm10/chm13/hg38 字串。
+# index
+# Use conditions to determines whether species contains string: mouse/human.
 if [[ $species == *'mm10'* ]]; then
   index=${staridx_mm10}
 
@@ -22,21 +22,21 @@ elif [[ $species == *'hg38'* ]]; then
 fi
 
 
-# 移動到 input 位置，抓取檔案成檔案名稱陣列
-# 根據 sample ID 找尋 (ls) 名稱，之後建立陣列：array=($(command))
+# grep files from sampleID at input folder.
+# collect files based on sampleID, then create an array using outter "()"
 cd ${inputpath}
 samples=($(ls ${sampleID}_*.fq.gz))
 
-# 計數陣列：有幾個 samples 被抓 (${#array[@]})
+# count the length of array: (${#array[@]})
 samples_len=${#samples[@]}
 
 # report
 echo "Target files: "${samples[@]}
 echo "Number of samples: "${samples_len}
+echo "Genome index file: "${index}
 
-
-# !! STAR input 不需要額外設定他是要用 paired-end 或是 single-end 的分析 !!
-# 所以直接將 ${samples[@]} array 裡面的內容都給 STAR
+# There is no need to clarify whether input is paried-end or single-end,
+# directly subject the sampleID array (${samples[@]}) to STAR.
 
 
 # program
@@ -46,8 +46,8 @@ STAR \
  --runThreadN ${core} \
  --readFilesCommand zcat \
  --readFilesIn ${samples[@]} \
- --outSAMprimaryFlag AllBestScore \
- --outMultimapperOrder Random \
+ --outSAMmapqUnique 255 \
+ --outSAMprimaryFlag OneBestScore \
  --outSAMtype BAM SortedByCoordinate \
  --outSAMattributes All \
  --outWigType wiggle \
@@ -56,14 +56,3 @@ STAR \
  --outFileNamePrefix ${outputpath}/${sampleID}_
 
 
-
-# options:
-: '
-# outSAMattributes
-sam 的 flags 要輸出哪些：全部
-
-#  --outFilterMultimapNmax
-alignment 被 mapping 到 genome 不同位置的次數上限
-如果在數值內就會被 output 到 output file
-
-'

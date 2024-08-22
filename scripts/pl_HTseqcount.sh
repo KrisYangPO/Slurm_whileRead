@@ -10,7 +10,7 @@ species=$5
 
 
 # index:
-# 用判斷式判斷 speci 裡面有沒有 mm10/chm13/hg38 字串。
+# Use conditions to determines whether species contains string: mouse/human.
 if [[ $species == *'mm10'* ]]; then
   gtf=${gtf_mm10}
 
@@ -23,14 +23,13 @@ elif [[ $species == *'hg38'* ]]; then
 fi
 
 
-# 抓取所有 bam 檔案，直接執行所有 htseq-count
+# grep all the bam files and perform htseq-count
 cd ${inputpath}
 sample=$(ls ${sampleID}_*.out.bam)
 samples=($(ls *.out.bam))
 
 
 # Run HTseq-count
-# files 要放在 gtf file 前面！！
 htseq-count -m intersection-nonempty --nonunique all \
  -f bam -s reverse \
  -t exon \

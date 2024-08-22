@@ -6,21 +6,21 @@ inputpath=$2
 out=$3
 core=$4
 
-# 抓取資料，移動到 input 所在位置
-# 根據 sample ID 找尋 (ls) 名稱，之後建立陣列：array=($(command))
+# grep files from sampleID at input folder.
+# collect files based on sampleID, then create an array using outter "()"
 cd ${inputpath}
 samples=($(ls ${sampleID}_*fastq*))
 
-# 計數陣列長度：檔案有幾個 (${#array[@]})
+# count the length of array: (${#array[@]})
 samples_len=${#samples[@]}
 
 echo "target samples: "${samples[@]}
 echo "sample number: "${samples_len}
 
 
-# 判斷陣列長度是否等於 2
-# 2: 執行 paired end
-# 1: 執行 single end
+# determinee the length of the array
+# 2: perform paired end
+# 1: perform single end
 
 if [ "$samples_len" -eq 2 ];then
   echo "perform paired-end trimming"
