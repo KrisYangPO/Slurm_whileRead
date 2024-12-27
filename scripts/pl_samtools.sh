@@ -7,7 +7,7 @@ core=$4
 
 #samtobam sorttobam rmdup build index
 samtools view \
- --threads ${core} -b ${outputpath}/${sampleID}.sam > ${outputpath}/${sampleID}.bam
+ --threads ${core} -b ${inputpath}/${sampleID}.sam > ${outputpath}/${sampleID}.bam
 
 # sort bam files
 samtools sort \
